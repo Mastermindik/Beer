@@ -1,0 +1,23 @@
+.beer_item {
+    padding: 1rem 0;
+
+    .container {
+        max-width: 70rem;
+
+        .wraper {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+
+            .photo {
+                flex: 0 0 28%;
+                display: flex;
+                justify-content: center;
+
+                img {
+                    height: 40rem;
+                }
+            }
+        }
+    }
+}

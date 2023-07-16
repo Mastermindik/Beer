@@ -1,0 +1,22 @@
+.section_beer_store {
+    padding: .5rem 0;
+    flex: 1 1 auto;
+    position: relative;
+
+    .wraper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+    }
+
+    .btn_delete {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+.checked {
+    transform: scale(.9);
+    // animation: moving .5s infinite;
+}

@@ -1,0 +1,34 @@
+.beer_main_info {
+    flex: 0 0 68%;
+
+    display: flex;
+    flex-direction: column;
+
+    .title {
+        text-align: center;
+        h1 {
+            font-size: 2rem;
+        }
+    }
+    .contributed {
+        text-align: end;
+        h3 {
+            margin: 0;
+        }
+    }
+    .descr {
+        margin: .5rem 0;
+    }
+    .characteristics {
+        p {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+    }
+    .food_pairing {
+        p {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }    
+    }
+}
