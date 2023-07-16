@@ -7,6 +7,7 @@ interface BearState {
   beersToDelete: number[],
   isLoading: boolean,
   fetchBeers: (page: number | string) => Promise<void>,
+  fetchMoreBeers: (page: number | string) => Promise<void>,
   toggleBeerToDelete: (id: number) => void,
   deleteBears: () => void
 }
@@ -19,6 +20,15 @@ const useBeerStore = create<BearState>()(
         beersToDelete: [],
         isLoading: false,
         fetchBeers: async (page) => {
+          try {
+            set({ isLoading: true })
+            const response: IBeer[] = await fetch(`${import.meta.env.VITE_API_URL}${page}`).then(data => data.json())
+            set((state) => ({ beers: [ ...response], isLoading: false }))
+          } catch (error) {
+            alert(error);
+          }
+        },
+        fetchMoreBeers: async (page) => {
           try {
             set({ isLoading: true })
             const response: IBeer[] = await fetch(`${import.meta.env.VITE_API_URL}${page}`).then(data => data.json())

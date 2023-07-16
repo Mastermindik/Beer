@@ -4,6 +4,8 @@ import useBeerStore from "../../store/store";
 import { useParams } from "react-router-dom";
 import BeerMainInfo from "../../components/BeerMainInfo/BeerMainInfo";
 import BeerRecipe from "../../components/BeerReciepe/BeerRecipe";
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 type Params = {
   id: string
@@ -20,12 +22,13 @@ function BeerItem() {
       const page = params.id ? parseInt(params.id) : 0;
       fetch(Math.floor(page / 25) + 1);
     }
+    AOS.init()
   }, [])
 
   return <section className={styles.beer_item}>
     <div className={`container ${styles.container}`}>
       <div className={styles.wraper}>
-        <div className={styles.photo}>
+        <div className={styles.photo} data-aos="fade-right">
           <img src={beer.image_url} alt="" />
         </div>
         <BeerMainInfo beer={beer} />

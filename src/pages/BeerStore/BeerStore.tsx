@@ -3,9 +3,11 @@ import useBeerStore from "../../store/store";
 import styles from "./BeerStore.module.scss"
 import BeerCard from "../../components/BeerCard/BeerCard";
 import { Button, Skeleton } from "@mui/material";
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 function BeerStore() {
-  const { beers, beersToDelete, isLoading, fetchBeers, toggleBeerToDelete, deleteBears } = useBeerStore();
+  const { beers, beersToDelete, isLoading, fetchBeers, toggleBeerToDelete, deleteBears, fetchMoreBeers } = useBeerStore();
   const [start, setStart] = useState<number>(0);
   const [end, setEnd] = useState<number>(15);
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -13,6 +15,7 @@ function BeerStore() {
   useEffect(() => {
     deleteBears()
     fetchBeers(page).then(() => setPage(page + 1));
+      AOS.init()
   }, [])
 
   function check(e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) {
@@ -23,7 +26,7 @@ function BeerStore() {
 
   useEffect(() => {
     if (beers.length && beers.length <= end) {
-      fetchBeers(page).then(() => setPage(page + 1))
+      fetchMoreBeers(page).then(() => setPage(page + 1))
     }
   }, [end, beers.length])
 
@@ -42,7 +45,7 @@ function BeerStore() {
   return <>
     <section className={styles.section_beer_store} ref={sectionRef}>
       <div className="container" >
-        <div className={styles.wraper}>
+        <div className={styles.wraper} data-aos="fade-up">
           {beers.slice(start, end).map(beer => <BeerCard beer={beer} check={check} key={beer.id} />)}
           {isLoading ? Array.from(Array(5)).map((_, index) => <Skeleton variant="rectangular" height={"40.8rem"} width={"16.1rem"} key={index} />) : ""}
         </div>

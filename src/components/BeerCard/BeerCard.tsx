@@ -9,7 +9,8 @@ type BeerCardProps = {
 }
 
 const BeerCard: React.FC<BeerCardProps> = ({ beer, check }) => {
-  return <Link to={`${beer.id}`} className={styles.beer_card} onContextMenu={(e) => check(e, beer.id)} >
+
+  return <Link to={`${beer.id}`} className={styles.beer_card} onContextMenu={(e) => check(e, beer.id)}>
     <div className={styles.name}>
       <h3>
         {beer.name}
