@@ -27,14 +27,14 @@ a {
   color: inherit;
 }
 
-body {
+body,
+html {
   margin: 0;
-  /* display: flex;
-  place-items: center; */
   min-width: 320px;
   min-height: 100vh;
   background: #fff;
   color: black;
+  scroll-snap-type: y mandatory;
 }
 
 .container {

@@ -1,14 +1,17 @@
 .beer_card {
+    margin-top: 1rem;
+    min-height: 45rem;
     padding: .5rem;
     display: flex;
     flex-direction: column;
-    // justify-content: center;
-    // align-items: center;
     flex: 0 0 calc(20% - 1rem);
     color: #0F1D2D;
     border: 1px solid #0F1D2D;
     border-radius: .5rem;
     transition: all .1s;
+
+    scroll-snap-align: start;
+    scroll-margin: 1rem;
 
     .photo {
         display: flex;
@@ -16,6 +19,7 @@
 
         img {
             height: 20.5rem;
+            filter: drop-shadow(10px 2px 20px #0F1D2D);
         }
     }
 
@@ -62,31 +66,5 @@
             overflow: hidden;
         }
     }
-
-    &.checked {
-        transform: scale(.8);
-        // animation: moving .5s infinite;
-    }
 }
 
-@keyframes moving {
-    0% {
-        transform: rotate(1deg) scale(.8);
-    }
-
-    25% {
-        transform: rotate(-1deg) scale(.8);
-    }
-
-    50% {
-        transform: rotate(1deg) scale(.8);
-    }
-
-    75% {
-        transform: rotate(-1deg) scale(.8);
-    }
-
-    100% {
-        transform: rotate(1deg) scale(.8);
-    }
-}

@@ -1,8 +1,9 @@
 .beer_recipe {
     flex: 100%;
-    
+
     display: flex;
     flex-wrap: wrap;
+
     .ingredients {
         flex: 0 0 100%;
         font-size: 2rem;
@@ -10,17 +11,21 @@
         text-align: center;
         text-transform: uppercase;
     }
+
     .yeast {
         flex: 0 0 100%;
         text-align: center;
+
         span {
             font-weight: bold;
             font-size: 1.2rem;
         }
     }
+
     .tips {
         flex: 0 0 100%;
         text-align: center;
+
         b {
             font-size: 2rem;
         }

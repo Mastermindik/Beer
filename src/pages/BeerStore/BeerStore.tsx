@@ -13,9 +13,14 @@ function BeerStore() {
   const sectionRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState<number>(1);
   useEffect(() => {
-    deleteBears()
+    deleteBears();
     fetchBeers(page).then(() => setPage(page + 1));
-      AOS.init()
+    AOS.init()
+    window.addEventListener('scroll', handle);
+
+    return () => {
+      window.removeEventListener("scroll", handle);
+    }
   }, [])
 
   function check(e: React.MouseEvent<HTMLDivElement, MouseEvent>, id: number) {
@@ -30,22 +35,26 @@ function BeerStore() {
     }
   }, [end, beers.length])
 
-  window.addEventListener("scroll", () => {
-    if (sectionRef.current?.scrollHeight && (sectionRef.current?.scrollHeight / 3 * 2) < window.scrollY) {
-      setStart(start + 5);
-      setEnd(end + 5);
-    } else if (sectionRef.current?.scrollHeight && (sectionRef.current?.scrollHeight / 6) > window.scrollY && end > 5 && start > 0) {
-      setStart(start - 5);
-      setEnd(end - 5);
+  function handle() {
+    if (sectionRef.current?.getBoundingClientRect().bottom === window.innerHeight - 11) {
+      setTimeout(() => {
+        setStart((start) => start + 5);
+        setEnd((end) => end + 5);
+      }, 200);
+      return
+    } else if (sectionRef.current?.getBoundingClientRect().top === 0) {
+      setTimeout(() => {
+        setStart(start => start - 5 >= 0 ? start - 5 : start);
+        setEnd(end => end - 5 >= 15 ? end - 5 : end);
+      }, 200);
+      return
     }
-  })
-
-
+  }
 
   return <>
-    <section className={styles.section_beer_store} ref={sectionRef}>
+    <section className={styles.section_beer_store} >
       <div className="container" >
-        <div className={styles.wraper} data-aos="fade-up">
+        <div className={styles.wraper} data-aos="fade-up" ref={sectionRef}>
           {beers.slice(start, end).map(beer => <BeerCard beer={beer} check={check} key={beer.id} />)}
           {isLoading ? Array.from(Array(5)).map((_, index) => <Skeleton variant="rectangular" height={"40.8rem"} width={"16.1rem"} key={index} />) : ""}
         </div>
