@@ -23,7 +23,7 @@ const useBeerStore = create<BearState>()(
           try {
             set({ isLoading: true })
             const response: IBeer[] = await fetch(`${import.meta.env.VITE_API_URL}${page}`).then(data => data.json())
-            set((state) => ({ beers: [ ...response], isLoading: false }))
+            set((_state) => ({ beers: [ ...response], isLoading: false }))
           } catch (error) {
             alert(error);
           }
